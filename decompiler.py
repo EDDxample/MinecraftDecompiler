@@ -12,18 +12,16 @@ def downloadFile(filename, url):
     except urllib.request.URLError(e):
         print('URL Error')
 def getMappings(version):
-    r = input('Download new mappings? (y/n): ')
-    if r == 'y':
-        print('=== Downloading mappings ===')
-        t=time.time()
-        try:
-            Path(f'mappings/{version}').mkdir()
-        except FileExistsError:
-            pass
-        tsrg = f'https://raw.githubusercontent.com/skyrising/mc-data/master/snapshot/{version}/client/mapping.tsrg'
-        downloadFile(f'mappings/{version}/mapping.tsrg', tsrg)
-        t = time.time() - t
-        print('Done in %.1fs' % t)
+    print('=== Downloading mappings ===')
+    t=time.time()
+    try:
+        Path(f'mappings/{version}').mkdir()
+    except FileExistsError:
+        pass
+    tsrg = f'https://raw.githubusercontent.com/skyrising/mc-data/master/snapshot/{version}/client/mapping.tsrg'
+    downloadFile(f'mappings/{version}/mapping.tsrg', tsrg)
+    t = time.time() - t
+    print('Done in %.1fs' % t)
 
 def remap(version):
     
@@ -63,7 +61,9 @@ def decompile(version):
         subprocess.run(['java','-jar',cfr.__str__(),path.__str__(),'--outputdir',f'./src/{version}','--caseinsensitivefs','true'],shell=True)
         
         print(f'- Removing -> {version}-temp.jar')
+        print(f'- Removing -> summary.txt')
         os.remove(f'./src/{version}-temp.jar')
+        os.remove(f'./src/{version}/summary.txt')
 
         t = time.time() - t
         print('Done in %.1fs' % t)
@@ -76,11 +76,14 @@ if __name__=="__main__":
 
     version = input('Version (eg 18w43b): ')
 
-    if False: # Mappings
+    r = input('Download mappings? (y/n): ')
+    if r == 'y':
         getMappings(version)
 
-    if False: # Remap
+    r = input('Remap? (y/n): ')
+    if r == 'y':
         remap(version)
 
-    if True: #Decompile
+    r = input('Decompile? (y/n): ')
+    if r == 'y':
         decompile(version)

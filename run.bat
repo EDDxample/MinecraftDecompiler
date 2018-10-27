@@ -1,2 +1,2 @@
-python decompile.py
+python decompiler.py
 pause
