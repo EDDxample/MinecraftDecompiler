@@ -1,5 +1,5 @@
 from pathlib import Path
-import subprocess, os, time, urllib.request
+import subprocess, os, time, urllib.request, shutil, sys, random
 
 def downloadFile(filename, url):
     try:
@@ -24,14 +24,23 @@ def getMappings(version):
     print('Done in %.1fs' % t)
 
 def remap(version):
-    
+
     print('=== Remapping jar using SpecialSource ====')
     t=time.time()
     
     path = Path(f'~/AppData/Roaming/.minecraft/versions/{version}/{version}.jar').expanduser()
     mapp = Path(f'mappings/{version}/mapping.tsrg')
     specialsource = Path('./lib/SpecialSource.jar')
-
+    try:
+        Path(f"src/{version}").mkdir(parents=True)
+    except FileExistsError:
+        aw=input(f"/src/{version} already exists, wipe it (w), create a new folder (n) or kill the process (k) ? ")
+        if aw=="w":
+            shutil.rmtree(Path(f"./src/{version}"))
+        elif aw=="n":
+            version=version+"_"+str(random.getrandbits(128))
+        else:
+            sys.exit()
     if path.exists() and mapp.exists() and specialsource.exists():
         path = path.resolve()
         mapp = mapp.resolve()
@@ -45,7 +54,7 @@ def remap(version):
         print('Done in %.1fs' % t)
     else:
         print(f'ERROR: Missing files')
-
+    return version
 def decompile(version):
 
     print('=== Decompiling using CFR ====')
@@ -74,7 +83,7 @@ if __name__=="__main__":
 
     print('Current mappings:\nhttps://github.com/skyrising/mc-data/tree/master/latest/client')
 
-    version = input('Version (eg 18w43b): ')
+    version = input('Version (eg 18w43b): ') or "18w43b"
 
     r = input('Download mappings? (y/n): ')
     if r == 'y':
@@ -82,7 +91,7 @@ if __name__=="__main__":
 
     r = input('Remap? (y/n): ')
     if r == 'y':
-        remap(version)
+        version=remap(version)
 
     r = input('Decompile? (y/n): ')
     if r == 'y':
