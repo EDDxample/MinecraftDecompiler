@@ -14,4 +14,4 @@ Run "run.bat" or `python decompiler.py` in shell (you will need python 3.6+, ok 
 You will need ofc, java jre and jdk (8 is fine) and the version .jar installed either in the regular windows directory (%appdata%/.minecraft/versions/1.13.1/1.13.1.jar and so on)
 
 
-The program and the files are under MIT license (only the srg and field names, the cfr ls still property of ben). You can credit me or not, your choice.
+The program and the files are under MIT license (the cfr ls still property of ben and SpecialSource of md-5). You can credit me or not, your choice.
