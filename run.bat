@@ -1,0 +1,2 @@
+python decompile.py
+pause
