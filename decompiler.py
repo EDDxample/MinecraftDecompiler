@@ -27,10 +27,15 @@ def remap(version):
 
     print('=== Remapping jar using SpecialSource ====')
     t=time.time()
-    
+	
+    try:
+        Path('src').mkdir()
+    except FileExistsError:
+        pass
+	
     path = Path(f'~/AppData/Roaming/.minecraft/versions/{version}/{version}.jar').expanduser()
     mapp = Path(f'mappings/{version}/mapping.tsrg')
-    specialsource = Path('./lib/SpecialSource.jar')
+    specialsource = Path('./lib/SpecialSource-1.8.6.jar')
     try:
         Path(f"src/{version}").mkdir(parents=True)
     except FileExistsError:
