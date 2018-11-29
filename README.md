@@ -1,4 +1,26 @@
-# MinecraftDecompiler
+# Snapshot Mod Maker
+
+Reorganized some files now that I know how to mod snapshots (thx Pokechu22 <3)
+
+## Process:
+- Generate a remapped copy of the source code (basically to find what you need)
+- Decompile the obfuscated versions of the classes you want to change
+- ``javac -cp <libs> <modified classes>``
+
+## Folders
+mc-code
+	<version>
+		mapped-src
+		<mod>
+		mappings.tsrg
+		mapped-<version>.jar
+
+## TODO
+- recomp.py (find a nice way to get from knowing what files do you want to modify to getting the actual obf classes)
+- gen_patched_json.py (port it from another project)
+
+
+## Old Info
 
 This decompiler should work for any version as long as its mappings are available (a printed message with the url is given for manual check), its wip (for now only decompiling and class name renaming is done).
 
