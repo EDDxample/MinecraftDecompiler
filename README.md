@@ -11,9 +11,9 @@ Reorganized some files now that I know how to mod snapshots (thx Pokechu22 <3)
 - mc-code
   - <version>
     - mapped-src
-    <mod>
-    mappings.tsrg
-    mapped-<version>.jar
+    - <mod>
+    - mappings.tsrg
+    - mapped-<version>.jar
 
 ## TODO
 - recomp.py (find a nice way to get from knowing what files do you want to modify to getting the actual obf classes)
